@@ -1,0 +1,20 @@
+[
+    {
+        "couple_pic": "https://i.ibb.co/ZT16RrP/download-13.jpg",
+        "marriage_date": "2022-05-15",
+        "review":2,
+        "success_story": "John and Jane met through the website in early 2021. After getting to know each other, they decided to tie the knot in a beautiful ceremony on May 15, 2022. Their love story is a testament to the success of online matchmaking."
+    },
+    {
+        "couple_pic": "https://i.ibb.co/TgmtB7J/download-12.jpg",
+        "marriage_date": "2023-02-28",
+        "review":4,
+        "success_story": "Michael and Emily connected through the website and quickly realized they were a perfect match. They got married on February 28, 2023, and their shared journey has been filled with love and joy."
+    },
+    {
+        "couple_pic": "https://i.ibb.co/PYqWxXw/download-11.jpg",
+        "marriage_date": "2021-11-10",
+        "review":5,
+        "success_story": "David and Sarah, after meeting on the site in 2020, decided to get married on November 10, 2021. Their success story is an inspiration to others looking for a life partner online."
+    }
+]

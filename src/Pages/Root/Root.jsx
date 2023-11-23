@@ -4,8 +4,8 @@ import Nav from "../Navbar/Nav";
 const Root = () => {
     return (
         <div>
-            <Outlet></Outlet>
             <Nav></Nav>
+            <Outlet></Outlet>
         </div>
     );
 };

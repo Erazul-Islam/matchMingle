@@ -1,8 +1,15 @@
+import Banner from "../../Components/Banner/Banner";
+import Profile from "../../Components/Profile/Profile";
+import Success from "../../Components/Success/Success";
+import Footer from "../Footer/Footer";
+
 const Home = () => {
     return (
         <div>
-            <img src="https://ibb.co/ns99TXw" alt="" />
-            <img src="https://ibb.co/ns99TXw" alt="" />
+            <Banner></Banner>
+            <Profile></Profile>
+            <Success></Success>
+            <Footer></Footer>
         </div>
     );
 };

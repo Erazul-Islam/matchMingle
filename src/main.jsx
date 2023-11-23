@@ -10,6 +10,10 @@ import Home from './Pages/Home/Home';
 import Contact from './Pages/Conatact us/Contact';
 import About from './Pages/About/About';
 import Biodata from './Pages/Biodatas/Biodata';
+import AuthProvider from './Providers/AuthProvider';
+import Register from './Pages/Register/Register';
+import Login from './Pages/Login/Login';
+import BiodataDetail from './Pages/Biodatas/BiodataDetail';
 
 
 const router = createBrowserRouter([
@@ -32,6 +36,19 @@ const router = createBrowserRouter([
       {
         path: 'biodata',
         element: <Biodata></Biodata>
+      },
+      {
+        path: 'register',
+        element: <Register></Register>
+      },
+      {
+        path: 'login',
+        element: <Login></Login>
+      },
+      {
+        path: 'all/:biodata_id',
+        element: <BiodataDetail></BiodataDetail>,
+        loader: () => fetch('http://localhost:5000/all')
       }
     ]
   },
@@ -39,6 +56,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-     <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 )
