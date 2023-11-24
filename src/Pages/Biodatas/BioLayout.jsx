@@ -2,6 +2,7 @@ import { Avatar, Card } from "keep-react";
 import { useContext } from "react";
 import { MdBookmarkAdded } from "react-icons/md";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const BioLayout = ({ data }) => {
@@ -42,7 +43,7 @@ const BioLayout = ({ data }) => {
                 imgSrc="https://i.ibb.co/5jVzFCC/download-10.jpg"
                 imgSize="md"
                 className="max-w-xs">
-                <Card.Container className="absolute text-5xl right-3.5 top-3.5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white">
+                <Card.Container className="absolute text-4xl right-3.5 top-3.5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full ">
                     <form onSubmit={handleAdd}>
                         <button><MdBookmarkAdded /></button>
                     </form>
@@ -73,7 +74,13 @@ const BioLayout = ({ data }) => {
                                 BioData Id
                             </Card.Title>
                             <Card.Title className="!text-body-1 !font-semibold text-metal-800">{biodata_id}</Card.Title>
+
                         </Card.Container>
+                        <Card.Title className="!text-body-1 !font-semibold text-yellow-700">
+                            <Link to={`/all/${biodata_id}`}>
+                                <button className="">Req</button>
+                            </Link>
+                        </Card.Title>
                     </Card.Container>
                 </Card.Container>
             </Card>

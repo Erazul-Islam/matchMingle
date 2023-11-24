@@ -14,6 +14,7 @@ import AuthProvider from './Providers/AuthProvider';
 import Register from './Pages/Register/Register';
 import Login from './Pages/Login/Login';
 import BiodataDetail from './Pages/Biodatas/BiodataDetail';
+import Checkgout from './Pages/Biodatas/Checkgout';
 
 
 const router = createBrowserRouter([
@@ -49,6 +50,11 @@ const router = createBrowserRouter([
       {
         path: 'all/:_id',
         element: <BiodataDetail></BiodataDetail>,
+        loader: () => fetch('http://localhost:5000/all')
+      },
+      {
+        path: 'all/:biodata_id',
+        element: <Checkgout></Checkgout>,
         loader: () => fetch('http://localhost:5000/all')
       }
     ]
