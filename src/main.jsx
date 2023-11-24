@@ -35,7 +35,8 @@ const router = createBrowserRouter([
       },
       {
         path: 'biodata',
-        element: <Biodata></Biodata>
+        element: <Biodata></Biodata>,
+        loader: () => fetch('http://localhost:5000/all')
       },
       {
         path: 'register',
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
         element: <Login></Login>
       },
       {
-        path: 'all/:biodata_id',
+        path: 'all/:_id',
         element: <BiodataDetail></BiodataDetail>,
         loader: () => fetch('http://localhost:5000/all')
       }

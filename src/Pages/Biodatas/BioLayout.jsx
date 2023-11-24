@@ -1,21 +1,51 @@
 import { Avatar, Card } from "keep-react";
+import { useContext } from "react";
+import { MdBookmarkAdded } from "react-icons/md";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 // eslint-disable-next-line react/prop-types
-const BioLayout = ({ profile }) => {
+const BioLayout = ({ data }) => {
 
-    console.log(profile)
+    console.log(data)
 
-    const { biodata_id, type, profile_image, division, occupation, age } = profile || {}
+    const { biodata_id, type, profile_image, division, occupation, age } = data || {}
+
+    const { user } = useContext(AuthContext)
+    console.log(user)
+
+    const userEmail = user.email;
+    console.log(userEmail)
+
+    const handleAdd = () => {
+        const add = { biodata_id, type, profile_image, division, occupation, age, userEmail }
+        console.log(add)
+
+        fetch(' http://localhost:5000/fav', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(add)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
+        console.log(handleAdd)
+    }
 
 
     return (
-        <div>
+        <div className="lg:ml-36 mt-10">
+            <p className="text-4xl text-blue-600 mb-6 ml-10">BioData Detail</p>
             <Card
                 imgSrc="https://i.ibb.co/5jVzFCC/download-10.jpg"
                 imgSize="md"
                 className="max-w-xs">
-                <Card.Container className="absolute right-3.5 top-3.5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-yellow-400">
-                   
+                <Card.Container className="absolute text-5xl right-3.5 top-3.5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white">
+                    <form onSubmit={handleAdd}>
+                        <button><MdBookmarkAdded /></button>
+                    </form>
                 </Card.Container>
                 <Card.Container className="flex flex-col items-center justify-center">
                     <Card.Container className="absolute top-32  rounded-full ring-4 ring-white ring-offset-0">

@@ -4,21 +4,23 @@ import BioLayout from "./BioLayout";
 
 const BiodataDetail = () => {
 
-
     const {_id} = useParams()
 
-    const [profile,setData] = useState({})
+    const [data,setData] = useState({})
 
-    const profiles = useLoaderData()
+    const datas = useLoaderData()
+
+
 
     useEffect(() => {
-        const findData = profiles.find(profile => profile._id = _id)
+        const findData = datas.find(data => data._id == _id)
         setData(findData)
-    },[_id,profiles])
+    },[_id,datas])
+   
 
     return (
         <div>
-            <BioLayout profile={profile} ></BioLayout>
+            <BioLayout data={data} ></BioLayout>
         </div>
     );
 };
