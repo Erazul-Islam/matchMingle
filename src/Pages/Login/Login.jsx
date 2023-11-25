@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
+import axios from "axios";
 
 const Login = () => {
 
@@ -9,13 +10,25 @@ const Login = () => {
     const navigate = useNavigate();
 
     const [loginError, setLoginError] = useState('')
+    const location = useLocation();
+
+    const from = location.state?.from.pathname || "/"
+    console.log(location.state)
 
     const handleGoogleLogin = () => {
         console.log('done')
         googleSignIn()
             .then(res => {
-                console.log(res)
-                navigate('/')
+                console.log(res.user)
+                const userInfo = {
+                    email: res.user?.email,
+                    name: res.user?.displayName
+                }
+                axios.post('http://localhost:5000/users',userInfo)
+                .then(res => {
+                    console.log(res.data)
+                    navigate('/')
+                })
             })
             .catch(error => {
                 console.log(error)
@@ -41,7 +54,7 @@ const Login = () => {
             .then(res => {
                 console.log(res.user)
                 e.target.reset()
-                navigate('/')
+                navigate(from,{replace: true})
             })
             .catch(error => {
                 console.log(error)

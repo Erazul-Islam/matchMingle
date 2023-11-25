@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { MdBookmarkAdded } from "react-icons/md";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
 const BioLayout = ({ data }) => {
@@ -20,19 +21,11 @@ const BioLayout = ({ data }) => {
     const handleAdd = () => {
         const add = { biodata_id, type, profile_image, division, occupation, age, userEmail }
         console.log(add)
-
-        fetch(' http://localhost:5000/fav', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(add)
+        
+        axios.post('http://localhost:5000/fav',add)
+        .then(res => {
+            console.log(res.data)
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-            })
-        console.log(handleAdd)
     }
 
 

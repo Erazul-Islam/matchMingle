@@ -15,6 +15,19 @@ import Register from './Pages/Register/Register';
 import Login from './Pages/Login/Login';
 import BiodataDetail from './Pages/Biodatas/BiodataDetail';
 import Checkgout from './Pages/Biodatas/Checkgout';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import Dashboard from './Components/DashBoard/Dashboard';
+import DashboardCart from './Components/DashBoard/DashboardCart';
+import MyContact from './Components/DashBoard/MyContact';
+import MyFavourite from './Components/DashBoard/MyFavourite';
+import Edit from './Components/DashBoard/Edit';
+
+const queryClient = new QueryClient();
+
 
 
 const router = createBrowserRouter([
@@ -49,7 +62,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'all/:_id',
-        element: <BiodataDetail></BiodataDetail>,
+        element: <PrivateRoute><BiodataDetail></BiodataDetail></PrivateRoute>,
         loader: () => fetch('http://localhost:5000/all')
       },
       {
@@ -59,12 +72,40 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+      path: 'dashboard',
+      element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+      children: [
+        {
+          path: 'cart',
+          element: <DashboardCart></DashboardCart>
+        },
+        {
+          path: 'mycontact',
+          element: <MyContact></MyContact>
+        },
+        {
+          path: 'favourites',
+          element: <MyFavourite></MyFavourite>
+        },
+        {
+          path: 'edit',
+          element: <Edit></Edit>
+        }
+      ]
+  }
 ]);
+
+
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </AuthProvider>
+
   </React.StrictMode>,
 )

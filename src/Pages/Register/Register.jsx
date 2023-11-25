@@ -4,6 +4,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Register = () => {
 
@@ -18,13 +19,24 @@ const Register = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
+                const name = loggedUser.name;
+                const email = loggedUser.email;
+
+                const userInfo = {name,email}
+
+                axios.post('http://localhost:5000/users',userInfo)
+                .then(res => {
+                    console.log(res.data)
+                })
+
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
                         // create user entry in the database
                         const userInfo = {
-                            name: data.name,
+                            name: data?.name,
                             email: data.email
                         }
+                        console.log(userInfo)
                         axiosPublic.post('/users', userInfo)
                             .then(res => {
                                 if (res.data.insertedId) {

@@ -1,4 +1,8 @@
-const Checkgout = () => {
+const Favourite = () => {
+
+    
+
+
     return (
         <div>
             
@@ -6,4 +10,4 @@ const Checkgout = () => {
     );
 };
 
-export default Checkgout;
+export default Favourite;

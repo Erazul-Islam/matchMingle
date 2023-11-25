@@ -1,4 +1,4 @@
-const Checkgout = () => {
+const MyContact = () => {
     return (
         <div>
             
@@ -6,4 +6,4 @@ const Checkgout = () => {
     );
 };
 
-export default Checkgout;
+export default MyContact;

@@ -1,4 +1,4 @@
-const Checkgout = () => {
+const Edit = () => {
     return (
         <div>
             
@@ -6,4 +6,4 @@ const Checkgout = () => {
     );
 };
 
-export default Checkgout;
+export default Edit;
