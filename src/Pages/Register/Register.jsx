@@ -19,7 +19,7 @@ const Register = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                const name = loggedUser.name;
+                const name = loggedUser.displayName;
                 const email = loggedUser.email;
 
                 const userInfo = {name,email}

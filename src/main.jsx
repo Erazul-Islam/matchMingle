@@ -25,6 +25,10 @@ import DashboardCart from './Components/DashBoard/DashboardCart';
 import MyContact from './Components/DashBoard/MyContact';
 import MyFavourite from './Components/DashBoard/MyFavourite';
 import Edit from './Components/DashBoard/Edit';
+import Admin from './Components/AdminDashboard/Admin';
+import Manage from './Components/AdminDashboard/Manage';
+import Approve from './Components/AdminDashboard/Approve';
+import ApproveContact from './Components/AdminDashboard/ApproveContact';
 
 const queryClient = new QueryClient();
 
@@ -78,7 +82,8 @@ const router = createBrowserRouter([
       children: [
         {
           path: 'cart',
-          element: <DashboardCart></DashboardCart>
+          element: <DashboardCart></DashboardCart>,
+          loader: () => fetch('http://localhost:5000/add')
         },
         {
           path: 'mycontact',
@@ -86,11 +91,30 @@ const router = createBrowserRouter([
         },
         {
           path: 'favourites',
-          element: <MyFavourite></MyFavourite>
+          element: <MyFavourite></MyFavourite>,
+          loader: () => fetch('http://localhost:5000/fav')
         },
         {
           path: 'edit',
-          element: <Edit></Edit>
+          element: <PrivateRoute><Edit></Edit></PrivateRoute>,
+          loader: ({params}) => fetch(`http://localhost:5000/add/${params._id}`)
+        },
+        {
+          path: 'admin',
+          element: <Admin></Admin>
+        },
+        {
+          path: 'manage',
+          element: <Manage></Manage>
+        },
+        {
+          path: 'premeium',
+          element: <Approve></Approve>,
+          
+        },
+        {
+          path: 'contact',
+          element: <ApproveContact></ApproveContact>
         }
       ]
   }
