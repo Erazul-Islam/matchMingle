@@ -10,12 +10,14 @@ const usePremeium = () => {
     const {data: isPremeium} = useQuery({
         queryKey: [user?.email, 'premeium'],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/users/admin/${user.email}`)
+            const res = await axiosPublic.get(`/users/${user.email}`)
             console.log(res.data)
             return res.data?.premeium
         }
+        
     })
     return [isPremeium]
+    
 };
 
 export default usePremeium;

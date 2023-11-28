@@ -29,6 +29,8 @@ import Admin from './Components/AdminDashboard/Admin';
 import Manage from './Components/AdminDashboard/Manage';
 import Approve from './Components/AdminDashboard/Approve';
 import ApproveContact from './Components/AdminDashboard/ApproveContact';
+import SuccessRoute from './Components/Success/SuccessRoute';
+import SuccessStory from './Components/AdminDashboard/SuccessStory';
 
 const queryClient = new QueryClient();
 
@@ -52,6 +54,10 @@ const router = createBrowserRouter([
         element: <About></About>
       },
       {
+        path: 'success',
+        element: <PrivateRoute><SuccessRoute></SuccessRoute></PrivateRoute>
+      },
+      {
         path: 'biodata',
         element: <Biodata></Biodata>,
         loader: () => fetch('http://localhost:5000/all')
@@ -70,9 +76,9 @@ const router = createBrowserRouter([
         loader: () => fetch('http://localhost:5000/all')
       },
       {
-        path: 'all/:biodata_id',
+        path: 'checkout',
         element: <Checkgout></Checkgout>,
-        loader: () => fetch('http://localhost:5000/all')
+        loader: () => fetch('http://localhost:5000/users')
       }
     ]
   },
@@ -102,6 +108,10 @@ const router = createBrowserRouter([
         {
           path: 'admin',
           element: <Admin></Admin>,
+        },
+        {
+          path: 'success',
+          element: <SuccessStory></SuccessStory>,
         },
         {
           path: 'manage',

@@ -2,8 +2,9 @@ import { Avatar, Card } from "keep-react";
 import { useContext } from "react";
 import { MdBookmarkAdded } from "react-icons/md";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import axios from "axios";
+import usePremeium from "../../Hooks/usePremeium";
 
 // eslint-disable-next-line react/prop-types
 const BioLayout = ({ data }) => {
@@ -13,19 +14,23 @@ const BioLayout = ({ data }) => {
     const { biodata_id, type, profile_image, division, occupation, age } = data || {}
 
     const { user } = useContext(AuthContext)
-    console.log(user)
 
     const userEmail = user.email;
-    console.log(userEmail)
+
+    const info = useLoaderData();
+    console.log(info)
+
+
+    const [isPremeium] = usePremeium();
 
     const handleAdd = () => {
         const add = { biodata_id, type, profile_image, division, occupation, age, userEmail }
         console.log(add)
-        
-        axios.post('http://localhost:5000/fav',add)
-        .then(res => {
-            console.log(res.data)
-        })
+
+        axios.post('http://localhost:5000/fav', add)
+            .then(res => {
+                console.log(res.data)
+            })
     }
 
 
@@ -70,9 +75,11 @@ const BioLayout = ({ data }) => {
 
                         </Card.Container>
                         <Card.Title className="!text-body-1 !font-semibold text-yellow-700">
-                            <Link to={`/all/${biodata_id}`}>
-                                <button className="">Req</button>
-                            </Link>
+                            {
+                                isPremeium ? <Link to={`/all/${biodata_id}`}>
+                                    <button className="">See Details</button>
+                                </Link> : <Link to={'/checkout'}><button>Req</button></Link>
+                            }
                         </Card.Title>
                     </Card.Container>
                 </Card.Container>

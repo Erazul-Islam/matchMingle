@@ -22,9 +22,12 @@ const Nav = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><NavLink to=''>Biodatas</NavLink></li>
-                            <li><NavLink to=''>About Us</NavLink></li>
-                            <li><NavLink to=''>Contact us</NavLink></li>
+                            <li><NavLink to='/'>Home</NavLink></li>
+                            <li><NavLink to='/biodata'>Biodatas</NavLink></li>
+                            <li><NavLink to='/about'>About Us</NavLink></li>
+                            <li><NavLink to='/contact'>Contact us</NavLink></li>
+                            <li><NavLink to='/success'>Got Married</NavLink></li>
+                            <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
                         </ul>
                     </div>
                     <p className="text-2xl font-bold">MatchMingle</p>
@@ -35,6 +38,7 @@ const Nav = () => {
                         <li><NavLink to='/biodata'>Biodatas</NavLink></li>
                         <li><NavLink to='/about'>About Us</NavLink></li>
                         <li><NavLink to='/contact'>Contact us</NavLink></li>
+                        <li><NavLink to='/success'>Got Married</NavLink></li>
                         <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
                     </ul>
                 </div>

@@ -25,6 +25,7 @@ const Dashboard = () => {
                         <li><NavLink to="/dashboard/manage">Manage Users</NavLink></li>
                         <li><NavLink to="/dashboard/premeium">Approved Premeium</NavLink></li>
                         <li><NavLink to="/dashboard/contact">Approved Contact Request</NavLink></li>
+                        <li><NavLink to="/dashboard/success">Success Story</NavLink></li>
                         <li className="pl-4" onClick={handleLogOut}>LogOut</li>
                         <li><NavLink to="/">Home</NavLink></li>
                     </ul></> : 

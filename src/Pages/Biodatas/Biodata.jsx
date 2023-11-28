@@ -3,9 +3,13 @@ import BiodataCard from "./BiodataCard";
 import { useLoaderData } from "react-router-dom";
 import { CaretRight } from "phosphor-react";
 import { Dropdown } from "keep-react";
+import usePremeium from "../../Hooks/usePremeium";
 
 
 const Biodata = () => {
+
+    const [isPremeium] = usePremeium();
+    console.log(isPremeium)
 
     const datas = useLoaderData()
 
