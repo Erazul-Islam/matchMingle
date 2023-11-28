@@ -2,16 +2,43 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const DashboardCart = () => {
 
     const { user } = useContext(AuthContext)
     const email = user.email
-
-
     const data = useLoaderData();
 
     const filteredData = data.filter(single => single.email === email)
+
+    const hanldeClick = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Make Premium"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const add = { email }
+                axios.post('http://localhost:5000/premium', add)
+                    .then(res => {
+                        console.log(res)
+                        Swal.fire({
+                            title: "Request sent",
+                            text: "Wait for Admin Approval",
+                            icon: "success"
+                        });
+                    })
+
+            }
+        });
+    }
+
 
 
     return (
@@ -100,11 +127,14 @@ const DashboardCart = () => {
                             </div>
                         </div>
                         <div>
-                            <button className="btn w-full h-12 mt-4 rounded-lg hover:bg-yellow-600 bg-yellow-400 border-none text-[#331A15]">Make Premeium</button>
                         </div>
                     </form>
                 </div>)
             }
+            {
+            
+            }
+            <button onClick={hanldeClick}>Make Premium</button>
         </div>
     );
 };

@@ -1,9 +1,20 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Navigate, Outlet } from "react-router-dom";
+import useAdmin from "../../Hooks/useAdmin";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Dashboard = () => {
 
 
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
+
+    const { logOut } = useContext(AuthContext)
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => <Navigate to='/'></Navigate>)
+            .catch(error => console.log(error))
+    }
 
     return (
         <div className="flex">
@@ -14,7 +25,7 @@ const Dashboard = () => {
                         <li><NavLink to="/dashboard/manage">Manage Users</NavLink></li>
                         <li><NavLink to="/dashboard/premeium">Approved Premeium</NavLink></li>
                         <li><NavLink to="/dashboard/contact">Approved Contact Request</NavLink></li>
-                        <li><NavLink to="/dashboard/bio">LogOut</NavLink></li>
+                        <li className="pl-4" onClick={handleLogOut}>LogOut</li>
                         <li><NavLink to="/">Home</NavLink></li>
                     </ul></> : 
                     
@@ -23,7 +34,7 @@ const Dashboard = () => {
                         <li><NavLink to="/dashboard/edit">Edit</NavLink></li>
                         <li><NavLink to="/dashboard/mycontact">My contact</NavLink></li>
                         <li><NavLink to="/dashboard/favourites">Favourites</NavLink></li>
-                        <li><NavLink to="/dashboard/bio">LogOut</NavLink></li>
+                        <li className="pl-4" onClick={handleLogOut}>LogOut</li>
                         <li><NavLink to="/">Home</NavLink></li>
                     </ul></>
                 }

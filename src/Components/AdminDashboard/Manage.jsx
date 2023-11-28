@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 const Manage = () => {
 
     const axiosSecure = useAxiosSecure();
-    const { data: users = [],refetch } = useQuery({
+    const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users')
@@ -18,22 +18,36 @@ const Manage = () => {
 
     const handleAdmin = user => {
         axiosSecure.patch(`/users/admin/${user._id}`)
-        .then(res => {
-            console.log(res.data)
-            if(res.data.modifiedCount > 0){
-                refetch
-                Swal.fire({
-                    title: "Good job!",
-                    text: "You clicked the button!",
-                    icon: "success"
-                  });
-            }
-        })
+            .then(res => {
+                console.log(res.data)
+                if (res.data.modifiedCount > 0) {
+                    refetch
+                    Swal.fire({
+                        title: "Good job!",
+                        text: "You clicked the button!",
+                        icon: "success"
+                    });
+                }
+            })
+    }
+
+    const handlePremeium = user => {
+        axiosSecure.patch(`/users/${user._id}`)
+            .then(res => {
+                console.log(res.data)
+                if (res.data.modifiedCount > 0) {
+                    refetch
+                    Swal.fire({
+                        title: "Good job!",
+                        text: "You clicked the button!",
+                        icon: "success"
+                    });
+                }
+            })
     }
 
     return (
-        <div>
-            {users.length}
+        <div className="mt-10">
 
             <Table>
                 <Table.Head>
@@ -59,13 +73,15 @@ const Manage = () => {
                             <Table.Cell>
                                 <Badge colorType="light" color="success">
                                     <div>
-                                        { user.role === 'admin' ? 'Admin' : <Button onClick={() => handleAdmin(user)} size="md" className="bg-green-400" type="default">Make Admin</Button>}
-                                        </div>
+                                        {user.role === 'admin' ? 'Admin' : <Button onClick={() => handleAdmin(user)} size="md" className="bg-green-400" type="default">Make Admin</Button>}
+                                    </div>
                                 </Badge>
                             </Table.Cell>
                             <Table.Cell>{user.email}</Table.Cell>
                             <Table.Cell>
-                            <Button size="md" className="bg-yellow-400" type="default">Make Premeium</Button>
+                                <div>
+                                    {user.type === 'premeium' ? 'Premeium' : <Button onClick={() => handlePremeium(user)} size="md" className="bg-yellow-400" type="default">Make Premeium</Button>}
+                                </div>
                             </Table.Cell>
                         </Table.Row>
                     </Table.Body>)
