@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { PieChart } from "recharts";
 
 
 
@@ -39,6 +40,18 @@ const Admin = () => {
                 <p>The Total Male Data : {filterByMale.length}</p>
                 <p>The total Female Data : {filterByFemale.length}</p>
                 <p>The total Premeium Data : {filterByPremeium.length}</p>
+            </div>
+            <div>
+                <PieChart
+                    series={[
+                        {
+                            filterByFemale,
+                            highlightScope: { faded: 'global', highlighted: 'item' },
+                            faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+                        },
+                    ]}
+                    height={200}
+                />
             </div>
         </div>
     );

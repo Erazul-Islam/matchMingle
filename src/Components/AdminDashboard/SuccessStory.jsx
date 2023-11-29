@@ -6,7 +6,7 @@ const SuccessStory = () => {
     const axiosPublic = useAxiosPublic();
 
     const { data: bio = [] } = useQuery({
-        queryKey: ['all'],
+        queryKey: ['successful'],
         queryFn: async () => {
             const res = await axiosPublic.get('/successful')
             return res.data

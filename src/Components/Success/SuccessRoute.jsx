@@ -1,25 +1,23 @@
-import { Button } from "keep-react";
 import axios from "axios";
 import Swal from "sweetalert2";
 const SuccessRoute = () => {
 
 
-    const hanldeSubmit = e => {
-
+    const handleAdd = e => {
         e.preventDefault()
 
         const form = e.target;
-        const biodataNum = form.number.value;
-        const partner = form.partner.value;
+
+        const number = form.number.value;
         const couple_pic = form.img.value;
+        const partner = form.partner.value;
         const success_story = form.success.value;
+        
 
-        console.log(biodataNum,partner,couple_pic,success_story)
+        const success = { number,couple_pic,partner,success_story }
+        console.log(success)
 
-        const successData = { biodataNum, partner, couple_pic, success_story }
-        console.log(successData)
-
-        axios.post('http://localhost:5000/successful', successData)
+        axios.post('http://localhost:5000/successful', success)
             .then(res => {
                 console.log(res.data)
                 if (res.insertedId) {
@@ -36,12 +34,11 @@ const SuccessRoute = () => {
 
 
 
-
     return (
         <div>
             <div className="lg:ml-32 lg:mt-32">
                 <p>Submit Your story</p>
-                <form onSubmit={hanldeSubmit}>
+                <form onSubmit={handleAdd}>
                     <div>
                         <div>
                             <span className="">Biodata Id</span><br />
@@ -60,7 +57,7 @@ const SuccessRoute = () => {
                             <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" required placeholder="story" name="success" type="text" />
                         </div>
                     </div>
-                    <Button size="md" className="bg-blue-600 mt-4" type="primary">Submit</Button>
+                    <button className="btn w-32 h-12 mt-4 rounded-lg hover:bg-yellow-600 bg-yellow-400 border-none text-[#331A15]">Submit</button>
                 </form>
             </div>
         </div>
