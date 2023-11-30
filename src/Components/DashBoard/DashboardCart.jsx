@@ -131,10 +131,8 @@ const DashboardCart = () => {
                     </form>
                 </div>)
             }
-            {
             
-            }
-            <button onClick={hanldeClick}>Make Premium</button>
+            <button className="btn btn-success" onClick={hanldeClick}>Make Premium</button>
         </div>
     );
 };

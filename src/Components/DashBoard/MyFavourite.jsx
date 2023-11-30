@@ -14,30 +14,36 @@ const MyFavourite = () => {
     const filteredData = favouriteData.filter(single => single.userEmail === email)
     console.log(filteredData)
 
-    const handleDelete = _id => {
+    const handleCancel = _id => {
         console.log(_id)
         Swal.fire({
-            title: 'Do you want Delete the product?',
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
             showCancelButton: true,
-            confirmButtonText: 'Delete',
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
         }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                fetch(` http://localhost:5000/fav/${_id}`,{
-                    method: 'DELETE'
+
+                fetch(` http://localhost:5000/fav/${_id}`, {
+                    method: "DELETE"
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
+                        console.log(data)
                         if (data.deletedCount > 0) {
-                            Swal.fire('Successfully Deleted', '', 'success')
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your cancelletion has been cancelled.",
+                                icon: "success"
+                            });
                         }
                     })
 
             }
-
-
-        })
+        });
     }
 
     return (
@@ -63,7 +69,7 @@ const MyFavourite = () => {
                                 <td>{data.biodata_id}</td>
                                 <td>{data.division}</td>
                                 <td>{data.occupation}</td>
-                                <th><button onClick={() => handleDelete(data._id)} className="btn">Delete</button></th>
+                                <th><button onClick={() => handleCancel(data._id)} className="btn">Delete</button></th>
                             </tr>)
                         }
                     </tbody>

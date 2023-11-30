@@ -6,7 +6,7 @@ import { Button, Table } from "keep-react";
 
 const ApproveContact = () => {
 
-    axios.get('http://localhost:5000/premium')
+    axios.get('http://localhost:5000/contact')
         .then(res => console.log(res.data))
 
     const axiosSecure = useAxiosSecure();
@@ -37,7 +37,7 @@ const ApproveContact = () => {
 
     return (
         <div>
-            <Table>
+            <Table className="mt-11">
                 <Table.Head>
                     <Table.HeadCell className="min-w-[290px]">
                         <p className="text-body-6 font-medium text-metal-400">User Name</p>
@@ -45,7 +45,7 @@ const ApproveContact = () => {
                     <Table.HeadCell className="min-w-[240px]">
                         Email Address
                     </Table.HeadCell>
-                    <Table.HeadCell className="min-w-[215px]">Make Premeium</Table.HeadCell>
+                    <Table.HeadCell className="min-w-[215px]">Approval</Table.HeadCell>
                 </Table.Head>
                 {
                     users.map(user => <Table.Body key={user._id} className="divide-y divide-gray-25">

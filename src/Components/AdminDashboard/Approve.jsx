@@ -19,6 +19,7 @@ const Approve = () => {
             return res.data
         }
     })
+    console.log(users)
 
     const handlePremeium = user => {
         axiosSecure.patch(`/premium/${user._id}`)

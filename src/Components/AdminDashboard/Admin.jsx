@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { PieChart } from "recharts";
+import { Pie, PieChart } from "recharts";
 
 
 
@@ -31,27 +31,59 @@ const Admin = () => {
     const filterByPremeium = premeium.filter(single => single.type === 'premeium')
     console.log(filterByPremeium)
 
+    const data01 = [
+        {
+            "name": "Group A",
+            "value": filterByFemale.length
+        },
+        {
+            "name": "Group B",
+            "value": bio.length
+        },
+        {
+            "name": "Group A",
+            "value": filterByMale.length
+        },
+        {
+            "name": "Group A",
+            "value": filterByPremeium.length
+        }
+    ];
+
+    const data02 = [
+        {
+            "name": "Group A",
+            "value": filterByFemale.length
+        },
+        {
+            "name": "Group B",
+            "value": bio.length
+        },
+        {
+            "name": "Group A",
+            "value": filterByMale.length
+        },
+        {
+            "name": "Group A",
+            "value": filterByPremeium.length
+        }
+    ];
+
 
 
     return (
         <div>
             <div className="text-3xl mt-10 text-yellow-400">
-                <p>The Total BioData : {bio.length}</p>
-                <p>The Total Male Data : {filterByMale.length}</p>
-                <p>The total Female Data : {filterByFemale.length}</p>
-                <p>The total Premeium Data : {filterByPremeium.length}</p>
+                <p className="text-green-500">The Total BioData : {bio.length}</p>
+                <p className="text-red-400">The Total Male Data : {filterByMale.length}</p>
+                <p className="text-blue-700">The total Female Data : {filterByFemale.length}</p>
+                <p className="text-cyan-600">The total Premeium Data : {filterByPremeium.length}</p>
             </div>
-            <div>
-                <PieChart
-                    series={[
-                        {
-                            filterByFemale,
-                            highlightScope: { faded: 'global', highlighted: 'item' },
-                            faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
-                        },
-                    ]}
-                    height={200}
-                />
+            <div className="mt-20">
+                <PieChart width={830} height={350}>
+                    <Pie data={data01} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={50} fill="#FF0000" />
+                    <Pie data={data02} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={60} outerRadius={80} fill="#FFBF00" label />
+                </PieChart>
             </div>
         </div>
     );

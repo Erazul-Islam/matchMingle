@@ -11,7 +11,7 @@ const BioLayout = ({ data }) => {
 
     console.log(data)
 
-    const { biodata_id, type, profile_image, division, occupation, age } = data || {}
+    const { biodata_id, type, profile_image, division, occupation, age,email,phone } = data || {}
 
     const { user } = useContext(AuthContext)
 
@@ -40,7 +40,7 @@ const BioLayout = ({ data }) => {
             <Card
                 imgSrc="https://i.ibb.co/5jVzFCC/download-10.jpg"
                 imgSize="md"
-                className="max-w-xs">
+                className="lg:w-[500px]">
                 <Card.Container className="absolute text-4xl right-3.5 top-3.5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full ">
                     <form onSubmit={handleAdd}>
                         <button><MdBookmarkAdded /></button>
@@ -76,9 +76,7 @@ const BioLayout = ({ data }) => {
                         </Card.Container>
                         <Card.Title className="!text-body-1 !font-semibold text-yellow-700">
                             {
-                                isPremeium ? <Link to={`/all/${biodata_id}`}>
-                                    <button className="">See Details</button>
-                                </Link> : <Link to={'/checkout'}><button>Req</button></Link>
+                                isPremeium ? <div className="text-xl">email:{email} <br /> phone: {phone}</div> : <Link to={'/checkout'}><button>Req</button></Link>
                             }
                         </Card.Title>
                     </Card.Container>

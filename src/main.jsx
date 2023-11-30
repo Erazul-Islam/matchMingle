@@ -103,7 +103,7 @@ const router = createBrowserRouter([
         {
           path: 'edit',
           element: <PrivateRoute><Edit></Edit></PrivateRoute>,
-          loader: ({params}) => fetch(`http://localhost:5000/add/${params._id}`)
+          loader: () => fetch('http://localhost:5000/add')
         },
         {
           path: 'admin',
