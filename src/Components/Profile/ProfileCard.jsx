@@ -1,7 +1,5 @@
 /* eslint-disable react/prop-types */
 import { Avatar, Card } from "keep-react";
-import { IoEyeSharp } from "react-icons/io5";
-import { Link } from "react-router-dom";
 
 const ProfileCard = ({ profile }) => {
 
@@ -15,11 +13,6 @@ const ProfileCard = ({ profile }) => {
                 imgSrc="https://i.ibb.co/5jVzFCC/download-10.jpg"
                 imgSize="md"
                 className="max-w-xs">
-                <Card.Container className="absolute right-3.5 top-3.5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-yellow-400">
-                    <Link to={`/profile/${biodata_id}`}>
-                        <IoEyeSharp />
-                    </Link>
-                </Card.Container>
                 <Card.Container className="flex flex-col items-center justify-center">
                     <Card.Container className="absolute top-32  rounded-full ring-4 ring-white ring-offset-0">
                         <Avatar size="2xl" shape="circle" img={profile_image} />

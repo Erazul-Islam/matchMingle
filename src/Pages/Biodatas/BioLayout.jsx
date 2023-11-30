@@ -5,6 +5,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useLoaderData } from "react-router-dom";
 import axios from "axios";
 import usePremeium from "../../Hooks/usePremeium";
+import useContact from "../../Hooks/useContact";
 
 // eslint-disable-next-line react/prop-types
 const BioLayout = ({ data }) => {
@@ -22,6 +23,7 @@ const BioLayout = ({ data }) => {
 
 
     const [isPremeium] = usePremeium();
+    const [isContact] = useContact();
 
     const handleAdd = () => {
         const add = { biodata_id, type, profile_image, division, occupation, age, userEmail }
@@ -76,7 +78,7 @@ const BioLayout = ({ data }) => {
                         </Card.Container>
                         <Card.Title className="!text-body-1 !font-semibold text-yellow-700">
                             {
-                                isPremeium ? <div className="text-xl">email:{email} <br /> phone: {phone}</div> : <Link to={'/checkout'}><button>Req</button></Link>
+                                isPremeium || isContact  ? <div className="text-xl">email:{email} <br /> phone: {phone}</div> : <Link to={'/checkout'}><button>Req</button></Link>
                             }
                         </Card.Title>
                     </Card.Container>

@@ -1,16 +1,14 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
-// import Swal from "sweetalert2";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Payement from "../../Components/AdminDashboard/Payement";
 
 
 const Checkgout = () => {
 
     const { user } = useContext(AuthContext)
     const email = user.email
-    
-    console.log(email)
 
     const hanldeClick = (e) => {
 
@@ -18,10 +16,9 @@ const Checkgout = () => {
         const form = e.target;
         const number = form.number.value;
         const partner = form.partner.value;
-        // const male = form.email.value;
         const card = form.card.value;
 
-        const add = {number,partner,card,email}
+        const add = { number, partner, card, email }
         console.log(add)
 
         axios.post('http://localhost:5000/contact', add)
@@ -38,7 +35,7 @@ const Checkgout = () => {
     }
 
 
-    
+
 
     return (
         <div className="lg:ml-20 mt-32">
@@ -54,15 +51,18 @@ const Checkgout = () => {
                     </div>
                     <div>
                         <span className="">Email</span><br />
-                        <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={email}  required placeholder="" name="partner" type="text" />
+                        <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={email} required placeholder="" name="partner" type="text" />
                     </div>
                     <div>
                         <span className="">Strip card</span><br />
-                        <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" required placeholder="story" name="card" type="text" />
+                        <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" required placeholder="Card number" name="card" type="text" />
                     </div>
                 </div>
-                <button  className="btn mt-4 btn-success">Submit</button>
+                <button className="btn mt-4 btn-success">Submit</button>
             </form>
+            <div>
+                <Payement></Payement>
+            </div>
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BiodataCard from "./BiodataCard";
 import { useLoaderData } from "react-router-dom";
 import { CaretRight } from "phosphor-react";
@@ -10,8 +10,7 @@ const Biodata = () => {
 
     const [isPremeium] = usePremeium();
     console.log(isPremeium)
-
-    const datas = useLoaderData()
+    const datas = useLoaderData();
 
     const [genderFilter, setGenderFilter] = useState(null)
     const [division, setDivision] = useState(null)
@@ -21,7 +20,25 @@ const Biodata = () => {
         setGenderFilter(selectedGender)
     }
 
-    
+    const [count,setCount] = useState('');
+    useEffect(() => {
+        fetch('http://localhost:5000/allCount')
+        .then(res => res.json())
+        .then(data => setCount(data))
+    })
+  
+    const items = 5;
+    const numberOfPages = Math.ceil(count.count/items)
+
+    const [currentPage,setCurrentPage] = useState(0);
+    console.log(currentPage)
+
+
+
+    const pages = []
+    for(let i = 0; i< numberOfPages; i++){
+        pages.push(i)
+    }
 
     const filterByDivision = (selectedDivision) => {
 
@@ -40,6 +57,12 @@ const Biodata = () => {
         return genderMatch, divisionMatch
 
     })
+
+    const handleChange = e => {
+        const val = parseInt(e.target.value)
+        console.log(val)
+        setCurrentPage(0)
+    }
 
     return (
         <div>
@@ -91,6 +114,21 @@ const Biodata = () => {
                 {
                     filteredProfiles.map(profile => <BiodataCard profile={profile} key={profile._id}></BiodataCard>)
                 }
+            </div>
+            <div className="lg:ml-60">
+                {
+                    pages.map(page => <button
+                    onClick={() => setCurrentPage(page)}
+                    
+                         key={page}
+                          className="ml-4 join-item btn btn-active">{page}</button>)
+                }
+                <select value={items} onChange={handleChange} name="" id="">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
             </div>
         </div>
     );

@@ -4,9 +4,11 @@ import { IoEyeSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 const BiodataCard = ({ profile }) => {
+    console.log(profile)
 
     const { _id ,biodata_id, type, profile_image, division, occupation, age } = profile || {}
-
+    
+    
 
     return (
         <div>
