@@ -32,7 +32,7 @@ const CreateBio = () => {
         const AddBio = { bio,image,type,birth,height,weight,age,occupation,fname,mname,perdiv,prediv,exage,exheight,exweight,mobile,email }
         console.log(AddBio)
 
-        axios.post('http://localhost:5000/add', AddBio)
+        axios.post('https://match-mingle-server.vercel.app/add', AddBio)
             .then(res => {
                 console.log(res.data)
                 if (res.insertedId) {

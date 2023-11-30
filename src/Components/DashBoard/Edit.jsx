@@ -37,7 +37,7 @@ const Edit = () => {
         console.log(EditBio)
 
 
-        fetch(` http://localhost:5000/add/${_id}`, {
+        fetch(` https://match-mingle-server.vercel.app/add/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

@@ -24,7 +24,7 @@ const Register = () => {
 
                 const userInfo = {name,email}
 
-                axios.post('http://localhost:5000/users',userInfo)
+                axios.post('https://match-mingle-server.vercel.app/users',userInfo)
                 .then(res => {
                     console.log(res.data)
                 })

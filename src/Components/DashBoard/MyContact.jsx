@@ -52,7 +52,7 @@ const MyContact = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(` http://localhost:5000/contact/${_id}`, {
+                fetch(` https://match-mingle-server.vercel.app/contact/${_id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())

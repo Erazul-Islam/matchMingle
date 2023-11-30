@@ -11,7 +11,7 @@ const Success = () => {
     );
 
     useEffect(() => {
-        fetch('http://localhost:5000/successful')
+        fetch('https://match-mingle-server.vercel.app/successful')
             .then(res => res.json())
             .then(data => setData(data))
     }, [])

@@ -22,7 +22,7 @@ const Biodata = () => {
 
     const [count,setCount] = useState('');
     useEffect(() => {
-        fetch('http://localhost:5000/allCount')
+        fetch('https://match-mingle-server.vercel.app/allCount')
         .then(res => res.json())
         .then(data => setCount(data))
     })

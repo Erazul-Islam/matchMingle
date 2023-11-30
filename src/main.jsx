@@ -60,7 +60,7 @@ const router = createBrowserRouter([
       {
         path: 'biodata',
         element: <Biodata></Biodata>,
-        loader: () => fetch('http://localhost:5000/all')
+        loader: () => fetch('https://match-mingle-server.vercel.app/all')
       },
       {
         path: 'register',
@@ -73,12 +73,12 @@ const router = createBrowserRouter([
       {
         path: 'all/:_id',
         element: <PrivateRoute><BiodataDetail></BiodataDetail></PrivateRoute>,
-        loader: () => fetch('http://localhost:5000/all')
+        loader: () => fetch('https://match-mingle-server.vercel.app/all')
       },
       {
         path: 'checkout',
         element: <Checkgout></Checkgout>,
-        loader: () => fetch('http://localhost:5000/users')
+        loader: () => fetch('https://match-mingle-server.vercel.app/users')
       }
     ]
   },
@@ -89,7 +89,7 @@ const router = createBrowserRouter([
         {
           path: 'cart',
           element: <DashboardCart></DashboardCart>,
-          loader: () => fetch('http://localhost:5000/add')
+          loader: () => fetch('https://match-mingle-server.vercel.app/add')
         },
         {
           path: 'mycontact',
@@ -98,12 +98,12 @@ const router = createBrowserRouter([
         {
           path: 'favourites',
           element: <MyFavourite></MyFavourite>,
-          loader: () => fetch('http://localhost:5000/fav')
+          loader: () => fetch('https://match-mingle-server.vercel.app/fav')
         },
         {
           path: 'edit',
           element: <PrivateRoute><Edit></Edit></PrivateRoute>,
-          loader: () => fetch('http://localhost:5000/add')
+          loader: () => fetch('https://match-mingle-server.vercel.app/add')
         },
         {
           path: 'admin',

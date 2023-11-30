@@ -25,7 +25,7 @@ const DashboardCart = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 const add = { email }
-                axios.post('http://localhost:5000/premium', add)
+                axios.post('https://match-mingle-server.vercel.app/premium', add)
                     .then(res => {
                         console.log(res)
                         Swal.fire({

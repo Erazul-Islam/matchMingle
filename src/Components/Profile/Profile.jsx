@@ -12,7 +12,7 @@ const Profile = () => {
     );
 
     useEffect(() => {
-        fetch('http://localhost:5000/profile')
+        fetch('https://match-mingle-server.vercel.app/profile')
             .then(res => res.json())
             .then(data => setData(data))
     }, [])

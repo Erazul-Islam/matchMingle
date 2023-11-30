@@ -7,7 +7,7 @@ import { Button } from "keep-react";
 
 const Approve = () => {
 
-    axios.get('http://localhost:5000/premium')
+    axios.get('https://match-mingle-server.vercel.app/premium')
         .then(res => console.log(res.data))
 
     const axiosSecure = useAxiosSecure();

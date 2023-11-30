@@ -21,7 +21,7 @@ const Checkgout = () => {
         const add = { number, partner, card, email }
         console.log(add)
 
-        axios.post('http://localhost:5000/contact', add)
+        axios.post('https://match-mingle-server.vercel.app/contact', add)
             .then(res => {
                 console.log(res.data)
                 if (res.insertedId) {

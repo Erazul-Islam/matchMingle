@@ -29,7 +29,7 @@ const BioLayout = ({ data }) => {
         const add = { biodata_id, type, profile_image, division, occupation, age, userEmail }
         console.log(add)
 
-        axios.post('http://localhost:5000/fav', add)
+        axios.post('https://match-mingle-server.vercel.app/fav', add)
             .then(res => {
                 console.log(res.data)
             })

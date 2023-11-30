@@ -17,7 +17,7 @@ const SuccessRoute = () => {
         const success = { number,couple_pic,partner,success_story }
         console.log(success)
 
-        axios.post('http://localhost:5000/successful', success)
+        axios.post('https://match-mingle-server.vercel.app/successful', success)
             .then(res => {
                 console.log(res.data)
                 if (res.insertedId) {
