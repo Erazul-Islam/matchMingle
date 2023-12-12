@@ -1,156 +1,200 @@
+import axios from "axios";
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import Swal from "sweetalert2";
 
 const Edit = () => {
 
     const editedData = useLoaderData();
     console.log(editedData)
 
-    const  { _id, bio,type,birth,height,weight,age,occupation,fname,mname,perdiv,prediv,exage,exheight,exweight,mobile,email } = editedData;
+    const [formData, setForm] = useState({
+        biodataType: 'male',
+        name: '',
+        profileImage: '',
+        dateOfBirth: '',
+        height: '',
+        weight: '',
+        age: '',
+        occupation: '',
+        race: '',
+        fathersName: '',
+        mothersName: '',
+        permanentDivision: '',
+        presentDivision: '',
+        expectedPartnerAge: '',
+        expectedPartnerHeight: '',
+        expectedPartnerWeight: '',
+        email: '',
+        mobile: '',
+    })
 
-    const handleEdit = e => {
-        e.preventDefault()
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setForm({
+            ...formData,
+            [name]: value,
+        });
+    };
 
-        const form = e.target;
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await axios.put('https://match-mingle-server.vercel.app/add', formData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    // add any additional headers if needed
+                },
+            });
 
-        const bio = form.bio.value;
-        const image = form.img.value;
-        const type = form.type.value;
-        const birth = form.birth.value;
-        const height = form.height.value;
-        const weight = form.weight.value;
-        const age = form.age.value;
-        const occupation = form.occupation.value;
-        const fname = form.fname.value;
-        const mname = form.mname.value;
-        const perdiv = form.perdiv.value;
-        const prediv = form.prediv.value;
-        const exage = form.exage.value;
-        const exheight = form.exheight.value;
-        const exweight = form.exweight.value;
-        const mobile = form.mobile.value;
-        const email = form.email.value
-
- 
-
-        const EditBio = { bio,image,type,birth,height,weight,age,occupation,fname,mname,perdiv,prediv,exage,exheight,exweight,mobile,email }
-        console.log(EditBio)
+            console.log('Data posted successfully:', response.data);
+        } catch (error) {
+            console.error('Error posting data:', error.message);
+        }
+    };
 
 
-        fetch(` https://match-mingle-server.vercel.app/add/${_id}`, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(EditBio)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if (data.modifiedCount > 0) {
-                    Swal.fire({
-                        title: "Good job!",
-                        text: "You clicked the button!",
-                        icon: "success"
-                    });
-                }
-            })
-
-    }
 
 
 
     return (
-        <div>
-            <h1 className="text-center pt-8 text-3xl">Add Bio</h1>
-            <form onSubmit={handleEdit} className="mt-8 pb-8 pr-36">
-                <div className="grid gap-4 grid-cols-1 lg:grid-cols-3 lg:justify-between">
+        <div className="lg:w-[800px] lg:ml-60 mt-10 pl-16 p-6 bg-white rounded-md shadow-md">
+            <div className='text-4xl mt-2 mb-2 lg:ml-36 font-bold text-blue-900'>
+                Edit Your Bio data
+            </div>
+            <form onSubmit={handleSubmit}>
+                <div className='flex gap-8'>
                     <div>
-                        <div>
-                            <span className="">Name</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" defaultValue={bio} required placeholder="Name" name="bio" type="text" />
-                        </div>
-                        <div>
-                            <span className="">Image</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]"  required placeholder="Publish image" name="img" type="text" />
-                        </div>
-                        <div>
-                            <span className="">Type</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" defaultValue={type} required placeholder="male/female" name="type" type="text" />
-                        </div>
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Biodata Type:
+                            <select className="w-full border bg-indigo-600 text-black p-2 rounded-md" name="biodataType" value={formData.biodataType} onChange={handleChange}>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </label>
+
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Name:
+                            <input className='w-full bg-emerald-600 h-8 font-semibold text-black rounded-lg' type="text" name="name" value={formData.name} onChange={handleChange} />
+                        </label>
+
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Profile Image:
+                            <input type="text" className='bg-emerald-600  font-semibold text-black' name="profileImage" onChange={handleChange} />
+                        </label>
+
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Date of Birth:
+                            <input type="date" className='bg-emerald-600 font-semibold text-black' name="dateOfBirth" value={formData.dateOfBirth} onChange={handleChange} />
+                        </label>
+
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Height:
+                            <select className="w-full bg-indigo-600 text-black border p-2 rounded-md" name="height" value={formData.height} onChange={handleChange}>
+                                <option value="short">Short</option>
+                                <option value="average">Average</option>
+                                <option value="tall">Tall</option>
+                            </select>
+                        </label>
+
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Weight:
+                            <select className="w-full bg-indigo-600 text-black border p-2 rounded-md" name="weight" value={formData.weight} onChange={handleChange}>
+                                <option value="light">Light</option>
+                                <option value="average">Average</option>
+                                <option value="heavy">Heavy</option>
+                            </select>
+                        </label>
+
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Age:
+                            <input className='w-full bg-emerald-600 h-8 font-semibold text-black rounded-lg' type="text" name="age" value={formData.age} onChange={handleChange} />
+                        </label>
+
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Occupation:
+                            <select className="w-full bg-indigo-600 text-black border p-2 rounded-md" name="occupation" value={formData.occupation} onChange={handleChange}>
+                                <option value="light">Teacher</option>
+                                <option value="average">Job</option>
+                                <option value="heavy">House wife</option>
+                            </select>
+                        </label>
+
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Fathers Name:
+                            <input className='w-full bg-emerald-600 h-8 font-semibold text-black rounded-lg' type="text" name="fathersName" value={formData.fathersName} onChange={handleChange} />
+                        </label>
                     </div>
+
                     <div>
-                        <div>
-                            <span className="">Date of birth</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" defaultValue={birth} required placeholder="Date of birth" name="birth" type="text" />
-                        </div>
-                        <div>
-                            <span className="">Height</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" defaultValue={height} required placeholder="Height" name="height" type="text" />
-                        </div>
-                        <div>
-                            <span className="">Weight</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" required defaultValue={weight} placeholder="weight" name="weight" type="text" />
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <span className="">Age</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" required defaultValue={age} placeholder="Age" name="age" type="text" />
-                        </div>
-                        <div>
-                            <span className="">Occupetion</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" required defaultValue={occupation} placeholder="Ocuupation" name="occupation" type="text" />
-                        </div>
-                        <div>
-                            <span className="">Email</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]"  required defaultValue={email} placeholder="email" name="email" type="text" />
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <span className="">Fathers name</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" required defaultValue={fname} placeholder="Fathers name" name="fname" type="text" />
-                        </div>
-                        <div>
-                            <span className="">Mothers name</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" required defaultValue={mname} placeholder="Mothers name" name="mname" type="text" />
-                        </div>
-                        <div>
-                            <span className="">Permanent Division</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" required defaultValue={perdiv} placeholder="permanent division" name="perdiv" type="text" />
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <span className="">Present Division</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" required defaultValue={prediv} placeholder="Present division" name="prediv" type="text" />
-                        </div>
-                        <div>
-                            <span className="">Expected partner age</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" required defaultValue={exage} placeholder="Expected" name="exage" type="text" />
-                        </div>
-                        <div>
-                            <span className="">Expected partner height</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" required defaultValue={exheight} placeholder="height" name="exheight" type="text" />
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <span className="">Expected partner weight</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" required defaultValue={exweight} placeholder="Present division" name="exweight" type="text" />
-                        </div>
-                        <div>
-                            <span className="">Mobile Number</span><br />
-                            <input className="lg:w-96 mt-2 h-10 rounded bg-[#fff]" required defaultValue={mobile} placeholder="Expected" name="mobile" type="text" />
-                        </div>
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Mothers Name:
+                            <input className='w-full bg-emerald-600 h-8 font-semibold text-black rounded-lg' type="text" name="mothersName" value={formData.mothersName} onChange={handleChange} />
+                        </label>
+
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Present Division:
+                            <select className="w-full bg-indigo-600 text-black border p-2 rounded-md" name="presentDivision" value={formData.presentDivision} onChange={handleChange}>
+                                <option value="Dhaka">Dhaka</option>
+                                <option value="Chottogram">Chottogram</option>
+                                <option value="Rangpur">Rangpur</option>
+                                <option value="Barishal">Barishal</option>
+                                <option value="Khulna">Khulna</option>
+                                <option value="Mymenshingh">Mymenshingh</option>
+                                <option value="Sylhet">Sylhet</option>
+                            </select>
+                        </label>
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Permanent Division:
+                            <select className="w-full bg-indigo-600 text-black border p-2 rounded-md" name="permanentDivision" value={formData.permanentDivision} onChange={handleChange}>
+                                <option value="Dhaka">Dhaka</option>
+                                <option value="Chottogram">Chottogram</option>
+                                <option value="Rangpur">Rangpur</option>
+                                <option value="Barishal">Barishal</option>
+                                <option value="Khulna">Khulna</option>
+                                <option value="Mymenshingh">Mymenshingh</option>
+                                <option value="Sylhet">Sylhet</option>
+                            </select>
+                        </label>
+
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Expected Partner age:
+                            <input className='w-full bg-emerald-600 h-8 font-semibold text-black rounded-lg' type="text" name="expectedPartnerAge" value={formData.expectedPartnerAge} onChange={handleChange} />
+                        </label>
+
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Expected Partner Height:
+                            <select className="w-full bg-indigo-600 text-black border p-2 rounded-md" name="expectedPartnerHeight" value={formData.expectedPartnerHeight} onChange={handleChange}>
+                                <option value="short">Short</option>
+                                <option value="average">Average</option>
+                                <option value="tall">Tall</option>
+                            </select>
+                        </label>
+
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Expected Partner Weight:
+                            <select className="w-full bg-indigo-600 text-black border p-2 rounded-md" name="expectedPartnerWeight" value={formData.expectedPartnerWeight} onChange={handleChange}>
+                                <option value="light">Light</option>
+                                <option value="average">Average</option>
+                                <option value="heavy">Heavy</option>
+                            </select>
+                        </label>
+
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Email:
+                            <input className='w-full bg-emerald-600 h-8 font-semibold text-black rounded-lg' type="text" name="email" readOnly value={formData.email} onChange={handleChange} />
+                        </label>
+
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">
+                            Phone:
+                            <input className='w-full bg-emerald-600 h-8 font-semibold text-black rounded-lg' required type="text" name="mobile" value={formData.mobile} onChange={handleChange} />
+                        </label>
                     </div>
                 </div>
 
-                <div>
-                    <button className="btn w-full h-12 mt-4 rounded-lg hover:bg-yellow-600 bg-yellow-400 border-none text-[#331A15]">Edit</button>
-                </div>
+                <button className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+                    type="submit">Edit</button>
             </form>
+
         </div>
     );
 };

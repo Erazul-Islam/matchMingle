@@ -46,23 +46,23 @@ const DashboardCart = () => {
             {
                 filteredData.map(data => <div key={data._id}>
                     <h1 className="text-center pt-8 text-3xl">Your Bio</h1>
-                    <img src={data.image} alt="" />
+                    <img src={data.profileImage} alt="" />
                     <form className=" mt-8 pb-8 pr-36">
                         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:justify-between">
                             <div>
                                 <div>
                                     <span className="">Name</span><br />
-                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.bio} readOnly required placeholder="Name" name="bio" type="text" />
+                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.name} readOnly required placeholder="Name" name="bio" type="text" />
                                 </div>
                                 <div>
                                     <span className="">Type</span><br />
-                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.type} readOnly required placeholder="male/female" name="type" type="text" />
+                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.biodataType} readOnly required placeholder="male/female" name="type" type="text" />
                                 </div>
                             </div>
                             <div>
                                 <div>
                                     <span className="">Date of birth</span><br />
-                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.birth} readOnly required placeholder="Date of birth" name="birth" type="text" />
+                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.dateOfBirth} readOnly required placeholder="Date of birth" name="birth" type="text" />
                                 </div>
                                 <div>
                                     <span className="">Height</span><br />
@@ -90,35 +90,35 @@ const DashboardCart = () => {
                             <div>
                                 <div>
                                     <span className="">Fathers name</span><br />
-                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.fname} readOnly required placeholder="Fathers name" name="fname" type="text" />
+                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.fathersName} readOnly required placeholder="Fathers name" name="fname" type="text" />
                                 </div>
                                 <div>
                                     <span className="">Mothers name</span><br />
-                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.mname} readOnly required placeholder="Mothers name" name="mname" type="text" />
+                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.mothersName} readOnly required placeholder="Mothers name" name="mname" type="text" />
                                 </div>
                                 <div>
                                     <span className="">Permanent Division</span><br />
-                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.perdiv} readOnly required placeholder="permanent division" name="perdiv" type="text" />
+                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.permanentDivision} readOnly required placeholder="permanent division" name="perdiv" type="text" />
                                 </div>
                             </div>
                             <div>
                                 <div>
                                     <span className="">Present Division</span><br />
-                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.perdiv} readOnly required placeholder="Present division" name="prediv" type="text" />
+                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.presentDivision} readOnly required placeholder="Present division" name="prediv" type="text" />
                                 </div>
                                 <div>
                                     <span className="">Expected partner age</span><br />
-                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.exage} readOnly required placeholder="Expected" name="exage" type="text" />
+                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.expectedPartnerAge} readOnly required placeholder="Expected" name="exage" type="text" />
                                 </div>
                                 <div>
                                     <span className="">Expected partner height</span><br />
-                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.exheight} readOnly required placeholder="height" name="exheight" type="text" />
+                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.expectedPartnerHeight} readOnly required placeholder="height" name="exheight" type="text" />
                                 </div>
                             </div>
                             <div>
                                 <div>
                                     <span className="">Expected partner weight</span><br />
-                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.exweight} readOnly required placeholder="Expected weight" name="exweight" type="text" />
+                                    <input className="lg:w-96 mt-2 h-10 rounded text-black bg-[#fff]" defaultValue={data.expectedPartnerWeight} readOnly required placeholder="Expected weight" name="exweight" type="text" />
                                 </div>
                                 <div>
                                     <span className="">Mobile Number</span><br />
@@ -132,7 +132,7 @@ const DashboardCart = () => {
                 </div>)
             }
             
-            <button className="btn btn-success" onClick={hanldeClick}>Make Premium</button>
+            <button className="h-12 w-40 bg-orange-700 rounded-lg text-black" onClick={hanldeClick}>Make Premium</button>
         </div>
     );
 };

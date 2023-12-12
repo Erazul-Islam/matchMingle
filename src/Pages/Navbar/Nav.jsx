@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link, NavLink, Navigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { Navbar } from "keep-react";
 
 const Nav = () => {
 
@@ -15,46 +16,55 @@ const Nav = () => {
 
     return (
         <div>
-            <div className="navbar bg-base-100">
-                <div className="navbar-start">
-                    <div className="dropdown">
-                        <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-                        </label>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><NavLink to='/'>Home</NavLink></li>
-                            <li><NavLink to='/biodata'>Biodatas</NavLink></li>
-                            <li><NavLink to='/about'>About Us</NavLink></li>
-                            <li><NavLink to='/contact'>Contact us</NavLink></li>
-                            <li><NavLink to='/success'>Got Married</NavLink></li>
-                            <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
-                        </ul>
-                    </div>
-                    <p className="text-2xl font-bold">MatchMingle</p>
+            <div className="w-full text-black">
+                <div>
+                    <Navbar className="bg-amber-500" fluid={true}>
+                        <Navbar.Container className="flex items-center justify-between">
+                            <Navbar.Container className="flex items-center">
+                                <Navbar.Brand>
+                                </Navbar.Brand>
+                                <Navbar.Divider></Navbar.Divider>
+                                <Navbar.Container
+                                    tag="ul"
+                                    className="lg:flex hidden items-center justify-between gap-8"
+                                >
+                                    <li className="text-3xl font-semibold text-blue-600">MatchMingle</li>
+                                    <NavLink to='/'>Home</NavLink>
+                                    <NavLink to='/biodata'>Biodatas</NavLink>
+                                    <NavLink to='/about'>About Us</NavLink>
+                                    <NavLink to='/contact'>Contact us</NavLink>
+                                    <NavLink to='/success'>Got Married</NavLink>
+                                    <NavLink to='/dashboard'>Dashboard</NavLink>
+                                </Navbar.Container>
+                                <Navbar.Collapse collapseType="sidebar">
+                                    <Navbar.Container tag="ul" className="flex flex-col gap-5">
+                                        <li className="text-3xl">MatchMingle</li>
+                                        <NavLink to='/'>Home</NavLink>
+                                        <NavLink to='/biodata'>Biodatas</NavLink>
+                                        <NavLink to='/about'>About Us</NavLink>
+                                        <NavLink to='/contact'>Contact us</NavLink>
+                                        <NavLink to='/success'>Got Married</NavLink>
+                                        <NavLink to='/dashboard'>Dashboard</NavLink>
+                                    </Navbar.Container>
+                                </Navbar.Collapse>
+                            </Navbar.Container>
+                            {
+                                user ? <>
+                                    <div className="flex mt-32 lg:mt-2 gap-4">
+                                        <p className=" lg:mt-2 lg">{user?.displayName}</p>
+                                        <img className="rounded-full h-8 w-8" src={user?.photoURL} alt="" />
+                                    </div>
+                                    <button onClick={handleLogOut} className="h-8 ">Sign Out</button>
+                                </>
+                                    :
+                                    <Link to="/login">
+                                        <button className="h-8">Login</button>
+                                    </Link>
+                            }
+
+                        </Navbar.Container>
+                    </Navbar>
                 </div>
-                <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
-                        <li><NavLink to='/'>Home</NavLink></li>
-                        <li><NavLink to='/biodata'>Biodatas</NavLink></li>
-                        <li><NavLink to='/about'>About Us</NavLink></li>
-                        <li><NavLink to='/contact'>Contact us</NavLink></li>
-                        <li><NavLink to='/success'>Got Married</NavLink></li>
-                        <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
-                    </ul>
-                </div>
-                {
-                    user ? <>
-                        <div className="flex mt-32 lg:mt-2 gap-4">
-                            <p className=" lg:mt-2 lg">{user?.displayName}</p>
-                            <img className="rounded-full h-8 w-8" src={user?.photoURL} alt="" />
-                        </div>
-                        <button onClick={handleLogOut} className="btn- btn-sm">Sign Out</button>
-                    </>
-                        :
-                        <Link to="/login">
-                            <button className="btn btn-sm">Login</button>
-                        </Link>
-                }
             </div>
         </div>
     );

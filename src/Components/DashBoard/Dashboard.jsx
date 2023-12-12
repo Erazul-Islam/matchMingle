@@ -2,6 +2,7 @@ import { NavLink, Navigate, Outlet } from "react-router-dom";
 import useAdmin from "../../Hooks/useAdmin";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { Sidebar } from "keep-react";
 
 const Dashboard = () => {
 
@@ -20,26 +21,87 @@ const Dashboard = () => {
         <div className="flex">
             <div className="w-64 min-h-full bg-violet-700">
                 {
-                    isAdmin ? <><ul className="menu p-4">
-                        <li className="text-"><NavLink to="/dashboard/admin">Admin Dashboard</NavLink></li>
-                        <li><NavLink to="/dashboard/manage">Manage Users</NavLink></li>
-                        <li><NavLink to="/dashboard/premeium">Approved Premeium</NavLink></li>
-                        <li><NavLink to="/dashboard/contact">Approved Contact Request</NavLink></li>
-                        <li><NavLink to="/dashboard/success">Success Story</NavLink></li>
-                        <li className="pl-4" onClick={handleLogOut}>LogOut</li>
-                        <li><NavLink to="/">Home</NavLink></li>
-                    </ul></> : 
-                    
-                    <><ul className="menu p-4">
-                        <li className="text-"><NavLink to="/dashboard/cart">View</NavLink></li>
-                        <li><NavLink to="/dashboard/edit">Edit</NavLink></li>
-                        <li><NavLink to="/dashboard/mycontact">My contact</NavLink></li>
-                        <li><NavLink to="/dashboard/favourites">Favourites</NavLink></li>
-                        <li className="pl-4" onClick={handleLogOut}>LogOut</li>
-                        <li><NavLink to="/">Home</NavLink></li>
-                    </ul></>
+                    isAdmin ? <><Sidebar aria-label="Sidebar with multi-level dropdown example">
+                        <Sidebar.ItemGroup>
+                            <NavLink to="/dashboard/admin">
+                                <Sidebar.Item >
+                                    Admin Dashboard
+                                </Sidebar.Item>
+                            </NavLink>
+                            <NavLink to="/dashboard/manage">
+                                <Sidebar.Item >
+                                    Manage Users
+                                </Sidebar.Item>
+                            </NavLink>
+
+                            <NavLink to="/dashboard/premeium">
+                                <Sidebar.Item >
+                                    Approved Premeium
+                                </Sidebar.Item>
+                            </NavLink>
+                            <NavLink to="/dashboard/contact">
+                                <Sidebar.Item >
+                                    Approved Contact Request
+                                </Sidebar.Item>
+                            </NavLink>
+                            <NavLink to="/">
+                                <Sidebar.Item >
+                                    Home
+                                </Sidebar.Item>
+                            </NavLink>
+                            <NavLink onClick={handleLogOut}>
+                                <Sidebar.Item >
+                                    Logout
+                                </Sidebar.Item>
+                            </NavLink>
+                        </Sidebar.ItemGroup>
+                    </Sidebar></> :
+
+                        <>
+                            <Sidebar aria-label="Sidebar with multi-level dropdown example">
+                                <Sidebar.ItemGroup>
+                                    <NavLink to="/dashboard/cart">
+                                        <Sidebar.Item >
+                                            View
+                                        </Sidebar.Item>
+                                    </NavLink>
+                                    <NavLink to="/dashboard/edit">
+                                        <Sidebar.Item >
+                                            Edit
+                                        </Sidebar.Item>
+                                    </NavLink>
+
+                                    <NavLink to="/dashboard/mycontact">
+                                        <Sidebar.Item >
+                                            My contact
+                                        </Sidebar.Item>
+                                    </NavLink>
+                                    <NavLink to="/dashboard/favourites">
+                                        <Sidebar.Item >
+                                            My Favourites
+                                        </Sidebar.Item>
+                                    </NavLink>
+                                    <NavLink to="/dashboard/success">
+                                        <Sidebar.Item >
+                                            Success Story
+                                        </Sidebar.Item>
+                                    </NavLink>
+                                    <NavLink to="/">
+                                        <Sidebar.Item >
+                                            Home
+                                        </Sidebar.Item>
+                                    </NavLink>
+                                    <NavLink onClick={handleLogOut}>
+                                        <Sidebar.Item >
+                                            Logout
+                                        </Sidebar.Item>
+                                    </NavLink>
+                                </Sidebar.ItemGroup>
+                            </Sidebar>
+                        </>
                 }
             </div>
+
             <div className="lg:ml-60 ml-20">
                 <Outlet></Outlet>
             </div>

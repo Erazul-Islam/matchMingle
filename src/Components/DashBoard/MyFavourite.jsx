@@ -69,7 +69,7 @@ const MyFavourite = () => {
                                 <td>{data.biodata_id}</td>
                                 <td>{data.division}</td>
                                 <td>{data.occupation}</td>
-                                <th><button onClick={() => handleCancel(data._id)} className="btn">Delete</button></th>
+                                <th><button onClick={() => handleCancel(data._id)} className="h-8 w-16 bg-orange-400 text-black rounded-lg">Delete</button></th>
                             </tr>)
                         }
                     </tbody>

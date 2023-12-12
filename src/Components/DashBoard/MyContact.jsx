@@ -96,7 +96,7 @@ const MyContact = () => {
                                 <td>Pending</td>
                                 <th>{single.phone}</th>
                                 <th></th>
-                                <th><button onClick={() => handleCancel(single._id)} className="btn btn-error">Delete</button></th>
+                                <th><button onClick={() => handleCancel(single._id)} className="h-8 bg-fuchsia-500 rounded-sm">Delete</button></th>
                             </tr>)
                         }
                     </tbody>
